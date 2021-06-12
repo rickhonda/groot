@@ -1,0 +1,4 @@
+shunhonda$ awk 'OFS="," {print $1,$2,$3,$4}' p.txt >> z.csv
+
+>>> P[P['deg_f']==300]['0.05'].iloc[0]
+
