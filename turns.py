@@ -35,16 +35,3 @@ class Turns(object):
                 if f['delta'][i+1] > 0: #next entry is positive
                     L.append(f['index'][i+1])
         return L
-    def revise(self,list,g,trp): ### works ### g = .4 gives 9z
-        i = 0 # the ith element of the list of indecies
-        L = [list[0]]
-        t = self.reformat(self.ws.trip(trp)) # a list of indecies where the sign changes # t is a fresh datafraeme with columbus delta and index added
-        while i < len(list) - 1:
-            q = 1
-            dd = abs(t['delta'].iloc[list[i+q]] - t['delta'].iloc[list[i]])
-            while dd < g and i + q < len(list) - 1:
-                dd = abs(t['delta'].iloc[list[i+q+1]] - t['delta'].iloc[list[i]])
-                q = q + 1 # q will continue to grow so long as dd is within g
-            L.append(t['index'].loc[list[i+q]])
-            i = i + q #; print(i)
-        return L # a list of confirmed turn initiations indecies  
