@@ -4,11 +4,12 @@ import seaborn as sns
 import csv, math, pathlib, os.path
 
 from groot.stops import Stops
+from groot.turns import Turns
 
 class WorkSample:
     def __init__(self):
         self.time_delta = 3
-        self.angle_delta = 30
+        self.angle_delta = 30 #60?
         self.pearson = pd.read_csv('groot/pearson.csv')
 
 #        self.train = train
@@ -48,6 +49,17 @@ class Dataset(WorkSample):
             margin_start,
             margin_end,
             stop_speed,
+            )
+
+    def turns(
+        self, 
+        margin_start = 30,
+        margin_end = 30,
+        stop_speed = 3,
+        ):
+        return Turns(
+            self,
+            self.angle_delta,
             )
 
 #>>> asdf.ds['train'].collect_sigs(300,'0.05')

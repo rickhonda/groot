@@ -8,7 +8,6 @@ class Stops(object):
         self.stop_speed = stop_speed
 
 
-
     def count_stops(trip):
         def trim(self,n):
             time_end = trip(self,n)['time_seconds'].max()
