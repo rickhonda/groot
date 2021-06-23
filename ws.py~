@@ -4,11 +4,12 @@ import seaborn as sns
 import csv, math, pathlib, os.path
 
 from groot.stops import Stops
+from groot.turns import Turns
 
 class WorkSample:
     def __init__(self):
         self.time_delta = 3
-        self.angle_delta = 30 #60?
+        self.angle_delta = 45 #60?
         self.pearson = pd.read_csv('groot/pearson.csv')
 
 #        self.train = train

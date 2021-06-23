@@ -26,7 +26,7 @@ class Turns(object):
         return t
 
     def sign_change(self,f):
-        L = []
+        L = [0]
         for i in range(len(f)- 1):
             if f['delta'][i] >= 0:# and f['delta'][i+1] < 0:
                 if f['delta'][i+1] < 0: # but next entry is negative
@@ -35,3 +35,20 @@ class Turns(object):
                 if f['delta'][i+1] > 0: #next entry is positive
                     L.append(f['index'][i+1])
         return L
+
+#does not work
+    def sc_sums(self,zeros): 
+        D = {}
+        s = 0; i = 0
+        while s < len(zeros) - 1:
+            sum = 0
+            while abs(sum) < self.angle_delta and s < len(zeros)-1:
+                for j in range(zeros[s],zeros[s+1]):
+                    sum = sum + (rt0.delta.iloc[j])
+                s = s + 1
+            if abs(sum) > self.angle_delta: 
+                D[zeros[s]] = int(sum)
+            i = s
+        return D
+
+

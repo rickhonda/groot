@@ -9,7 +9,7 @@ from groot.turns import Turns
 class WorkSample:
     def __init__(self):
         self.time_delta = 3
-        self.angle_delta = 30 #60?
+        self.angle_delta = 45 #60?
         self.pearson = pd.read_csv('groot/pearson.csv')
 
 #        self.train = train
@@ -51,12 +51,7 @@ class Dataset(WorkSample):
             stop_speed,
             )
 
-    def turns(
-        self, 
-        margin_start = 30,
-        margin_end = 30,
-        stop_speed = 3,
-        ):
+    def turns(self):
         return Turns(
             self,
             self.angle_delta,
