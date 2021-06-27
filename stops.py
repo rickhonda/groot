@@ -13,7 +13,6 @@ class Stops(object):
             time_end = trip(self,n)['time_seconds'].max()
             trimed_start = trip(self,n)[trip(self,n).time_seconds > self.margin_start]
             trimmed = trimed_start[trimed_start.time_seconds < time_end - self.margin_end]
-
             sf = trimmed[trimmed.speed_meters_per_second < self.stop_speed]
             if sf.empty:
                 return 0
@@ -28,24 +27,3 @@ class Stops(object):
     @count_stops
     def trip(self,n):
         return self.ws.trip(n)
-
-"""
-    @property
-    def margin_start(self):
-        print('called getter')
-        return self._margin_start
-
-    @margin_start.setter
-    def margin_start(self, new_margin_start):
-        print('called setter')
-        self._margin_start = new_margin_start
-"""
-"""
-    def trim(trip):
-        def inner(self,n):
-            time_end = trip(self,n)['time_seconds'].max()
-            trimed_start = trip(self,n)[trip(self,n).time_seconds > self.margin_start]
-            trimmed = trimed_start[trimed_start.time_seconds < time_end - self.margin_end]
-            return trimmed
-        return inner
-"""
