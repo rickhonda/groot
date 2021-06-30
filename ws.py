@@ -12,9 +12,6 @@ class WorkSample:
         self.angle_delta = 45 #60?
         self.pearson = pd.read_csv('groot/pearson.csv')
 
-#        self.train = train
-#        self.test = test
-
 class Dataset(WorkSample):
     def __init__(
         self,
@@ -34,8 +31,6 @@ class Dataset(WorkSample):
         return pd.read_csv(self.dataset + '/' + self.filename(n))
 
 # >>>train.stops(0,30,3).trip(0)
-# 1        
-#    def __init__(self, ws, time_delta, margin, stop_speed):
 
     def stops(
         self, 
@@ -104,27 +99,3 @@ class Task:
     
     def chop_dataframe(self):
         pass
-    
-
-
-
-
-
-
-"""
-    def collect_sigs(self, degrees_of_freedom, sig):
-        cores = self.data_matrix.iloc[:degrees_of_freedom+2,].corr()['y'].iloc[:-1,]
-        p = self.pearson
-        cores = pd.DataFrame(cores.reset_index())
-
-        pp = p[p['deg_f'] ==degrees_of_freedom][sig].iloc[0]
-        L = []
-        c = 0
-        for i in range(len(cores)): 
-            if abs(cores.iloc[i]['y']) > pp:
-                L.append(cores.iloc[i]['index'])
-        return L
-
-    def prune_h0(self): 
-        pass
-"""
