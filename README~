@@ -1,0 +1,8 @@
+"""
+td = groot.link('model_data_train.csv', 'trip_data', 'y')
+td_ = groot.link('model_data_test.csv', 'work_sample_test_trips')
+task = groot.ws.Task(train=td, test=td_)
+task.ds['train'].trip(0)
+t0 = task.ds['train'].trip(0)
+task.ds['train'].turns().delta(t0)
+"""
