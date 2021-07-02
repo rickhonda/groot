@@ -28,7 +28,17 @@ class Dataset(WorkSample):
         return self.data_matrix['filename'][b]
 
     def trip(self,n):
-        return pd.read_csv(self.dataset + '/' + self.filename(n))
+#        return pd.read_csv(self.dataset + '/' + self.filename(n))
+        return pd.read_csv(self.dataset + '/' + self.data_matrix['filename'][n])
+
+#    def flip(self,n):
+#        return pd.read_csv(self.dataset + '/' + self.data_matrix['filename'][n]
+    
+#    def reformat(self,df): 
+#        pass
+
+#>>> asdf = pd.read_csv(td.dataset + "/" + td.data_matrix['filename'][0])
+
 
 # >>>train.stops(0,30,3).trip(0)
 
