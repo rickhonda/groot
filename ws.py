@@ -24,21 +24,8 @@ class Dataset(WorkSample):
         self.dataset = dataset
         self.target = target_vector
 
-    def filename(self,b):
-        return self.data_matrix['filename'][b]
-
     def trip(self,n):
-#        return pd.read_csv(self.dataset + '/' + self.filename(n))
         return pd.read_csv(self.dataset + '/' + self.data_matrix['filename'][n])
-
-#    def flip(self,n):
-#        return pd.read_csv(self.dataset + '/' + self.data_matrix['filename'][n]
-    
-#    def reformat(self,df): 
-#        pass
-
-#>>> asdf = pd.read_csv(td.dataset + "/" + td.data_matrix['filename'][0])
-
 
 # >>>train.stops(0,30,3).trip(0)
 
@@ -96,7 +83,7 @@ class Task:
         cores = self.ds[ds_train].data_matrix.iloc[:degrees_of_freedom+2,].corr()['y'].iloc[:-1,]
         p = self.ds[ds_train].pearson
         cores = pd.DataFrame(cores.reset_index())
-        pp = p[p['deg_f'] ==degrees_of_freedom][sig].iloc[0]
+        pp = p[p['deg_f'] == degrees_of_freedom][sig].iloc[0]
         L = []
         c = 0
         for i in range(len(cores)): 
