@@ -1,5 +1,4 @@
 import pandas as pd
-
 class Turns(object):
     def __init__(self, ws, angle_delta):
         self.ws = ws

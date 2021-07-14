@@ -23,9 +23,32 @@ class Dataset(WorkSample):
         self.data_matrix = pd.read_csv(data_matrix)
         self.dataset = dataset
         self.target = target_vector
+#        self.target_vector = self.data_matrix.loc[:,:-1]
+        self.X = self.data_matrix.iloc[:,1:-1]
+        self._xa1 = None
+        self._xa2 = None
+
+    @property 
+    def xa1(self):
+        return self._xa1
+
+#    def xa1(self,ws,time_delta,margin_start,margin_end,stop_speed)
+    @xa1.setter
+    def xa1(self, p):
+        self._xa1 = pd.Series([self.stops(p[0],p[1],p[2]).trip(x) for x in range(len(self.X))])
+
+    @property
+    def xa2(self):
+        return self._xa2
+
+    @xa2.setter
+    def xa2(self,angle_delta):
+        self._xa2 = pd.Series([self.turns(angle_delta).trip(x) for x in range(len(self.X))])
 
     def trip(self,n):
         return pd.read_csv(self.dataset + '/' + self.data_matrix['filename'][n])
+
+    
 
 # >>>train.stops(0,30,3).trip(0)
 
@@ -43,10 +66,14 @@ class Dataset(WorkSample):
             stop_speed,
             )
 
-    def turns(self):
+
+    def turns(
+        self,
+        angle_delta = 45,
+        ):
         return Turns(
             self,
-            self.angle_delta,
+            angle_delta,
             )
 
 #>>> asdf.ds['train'].collect_sigs(300,'0.05')
@@ -91,8 +118,12 @@ class Task:
                 L.append(cores.iloc[i]['index'])
         return L
 
-    def prune_h0(self): 
-        pass
-    
-    def chop_dataframe(self):
-        pass
+    def prune_X(self,ds_name):
+        sigs_= self.ds[ds_name].collect_sigs(300,'0.05')
+        Xa_ = self.ds[ds_name].X.loc[:,sigs_]
+        self.ds[ds_name].xa1 = (30,30,3)
+        self.ds[ds_name].xa2 = 45
+        Xa_['xa1'] = self.ds[ds_name].xa1
+        Xa_['xa2'] = self.ds[ds_name].xa2
+        self.ds[ds_name].Xa = Xa_
+        
